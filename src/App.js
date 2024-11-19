@@ -35,7 +35,7 @@ function App() {
                   <div>
                     <h5 className="card-title">{product.title}</h5>
                     <p className="card-text text-success">
-                      ${product.price.toFixed(2)}{" "}
+                      ${product.price.toFixed(2)}
                       {/* toFixed(X) rounds off the price to X decimal places */}
                     </p>
                   </div>
@@ -43,7 +43,7 @@ function App() {
                     {/* Show count if the product is in the cart, badge beside "Add To Cart" button */}
                     {/* Shorthand Method: If count > 0 is true, it performs code in bracket if not it doesn't */}
                     {count > 0 && (
-                      <span className="badge bg-info text-dark me-2">
+                      <span className="badge bg-secondary-subtle text-dark me-2">
                         {count} in cart
                       </span>
                     )}
@@ -55,6 +55,8 @@ function App() {
                         setShoppingCart(updatedCart);
                         // Update total price
                         setTotalPrice(totalPrice + product.price);
+                        console.log(updatedCart);
+                        console.log(shoppingCart);
                       }}
                     >
                       Add to Cart
@@ -69,13 +71,13 @@ function App() {
         {/* Shopping Cart Section */}
         <div className="col-md-6">
           <h2 className="mb-4">Shopping Cart</h2>
-          <div className="card p-3 border-0 shadow-sm">
+          <div className="card p-3">
             {/* Show shopping cart only if a product is added to the shopping cart array */}
             {shoppingCart.length > 0 ? (
               <div>
                 {shoppingCart.map((cartItem, index) => (
                   <div
-                    className="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2"
+                    className="d-flex justify-content-between align-items-center pb-2 mb-2"
                     key={index}
                   >
                     <div>
@@ -89,13 +91,15 @@ function App() {
                       onClick={() => {
                         // Remove product from the cart
                         const productToRemove = shoppingCart[index];
-                        // Callback function
-                        const updatedCart = shoppingCart.filter(
+                        // Callback function, "_" points to the current product, i = product index
+                        const removedCart = shoppingCart.filter(
                           (_, i) => i !== index
                         );
-                        setShoppingCart(updatedCart);
+                        setShoppingCart(removedCart);
                         // Update total price
                         setTotalPrice(totalPrice - productToRemove.price);
+                        console.log(removedCart);
+                        console.log(shoppingCart);
                       }}
                     >
                       Remove
@@ -104,9 +108,9 @@ function App() {
                 ))}
 
                 {/* Display total items and total price */}
-                <div className="d-flex justify-content-between align-items-center mt-3">
-                  <h6 className="text-muted mb-0">Items in Cart:</h6>
-                  <h6 className="fw-bold mb-0">{shoppingCart.length}</h6>
+                <div className="d-flex justify-content-between align-items-center mt-3 border-top">
+                  <h6 className="text-muted mb-0 pt-3">Items in Cart:</h6>
+                  <h6 className="fw-bold mb-0 pt-3">{shoppingCart.length}</h6>
                 </div>
                 <div className="d-flex justify-content-between align-items-center mt-2">
                   <h6 className="text-muted mb-0">Total:</h6>
