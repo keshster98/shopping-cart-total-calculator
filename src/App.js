@@ -126,7 +126,9 @@ function App() {
               </div>
             ) : (
               // If the cart is empty, display a message
-              <p className="text-center text-muted">Your cart is empty.</p>
+              <p className="text-center text-secondary pt-3">
+                Your cart is empty
+              </p>
             )}
           </div>
         </div>
